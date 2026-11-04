@@ -8,25 +8,27 @@ from listes_simplement_chainees import ListeChainee
 class Pile:
     
     def __init__(self):
-        pass
+        self.data = ListeChainee()
 
     def est_vide(self): 
-        pass
+        return self.data.est_vide()
     
     def sommet(self):
-        pass
+        return self.data.tete.valeur
 
     def empiler(self, x): 
-        pass
+        self.data.inserer_tete(x)
     
     def depiler(self):
-        pass
+        val = self.data.tete.valeur
+        self.data.supprimer_tete()
+        return val
     
     def longueur(self): 
-        pass
+        return self.data.longueur()
     
     def afficher(self):
-        pass
+        self.data.afficher()
 
 if __name__ == "__main__":
     p1 = Pile()
@@ -39,4 +41,3 @@ if __name__ == "__main__":
     v = p1.depiler(); print("Extrait : " + str(v))
     v = p1.depiler(); print("Extrait : " + str(v))
     p1. afficher()
-

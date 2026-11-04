@@ -8,22 +8,26 @@ class Pile:
     def __init__(self): self.data = []
     
     def est_vide(self):
-        pass
+        if len(self.data) < 1 :
+            return True
+        else : 
+            return False
     
     def sommet(self):
-        pass
+        return self.data[-1]
 
     def empiler(self, x): 
-        pass
+        self.data.append(x)
     
     def depiler(self):
-        pass
+        depile = self.data.pop()
+        return depile
     
     def longueur(self): 
-        pass
+        return len(self.data)
     
     def afficher(self):
-        pass
+        print(self.data)
 
 if __name__ == "__main__":
     p1 = Pile()
@@ -36,4 +40,3 @@ if __name__ == "__main__":
     v = p1.depiler(); print("Extrait : " + str(v))
     v = p1.depiler(); print("Extrait : " + str(v))
     p1. afficher()
-
