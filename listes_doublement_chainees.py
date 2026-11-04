@@ -27,24 +27,59 @@ class ListeDoublementChainee:
 
     # Ajouter en début sans oublier le double chainage et le pointeur de queue
     def inserer_tete(self, val):
-        pass
+        nouvelle = CelluleDoublementChainee(val, self.tete)
+        self.tete = nouvelle
+        if self.queue is None:
+            self.queue = nouvelle
 
-    def supprimer_tete(self):      
-        pass
+
+    def supprimer_tete(self):
+        if self.tete is None:
+            return
+
+        self.tete = self.tete.suivant
+        if self.tete is None:
+            self.queue = None
+        else:
+            self.tete.precedent = None
 
     def inserer_queue(self, val):
-        pass
- 
-    def supprimer_queue(self):      
-        pass
+        nouvelle = CelluleDoublementChainee(val)
+        if self.queue is None:
+            self.tete = nouvelle
+            self.queue = nouvelle
+        else:
+            nouvelle.precedent = self.queue
+            self.queue.suivant = nouvelle
+            self.queue = nouvelle
+
+    def supprimer_queue(self):
+        if self.queue is None:
+            return
+
+        self.queue = self.queue.precedent
+        if self.queue is None:
+            self.tete = None
+        else:
+            self.queue.suivant = None
     
-     # Nombre de cellules en version itérative
+    # Nombre de cellules en version itérative
     def longueur(self):
-        return 0
+        longueur = 0
+        courant = self.tete
+        while courant is not None:
+            longueur += 1
+            courant = courant.suivant
+        return longueur
 
     # Nombre de cellules en version récursive
     def longueur_recursif(self):
-        return 0 
+        def compter(cellule):
+            if cellule is None:
+                return 0
+            return 1 + compter(cellule.suivant)
+
+        return compter(self.tete)
         
     def afficher(self):
         if self.tete is not None: 
@@ -67,16 +102,16 @@ class ListeDoublementChainee:
         print("None")
 
     def afficher_recursif(self):
-        def afficher_aux(cell) : 
-            # A compléter : fonction locale
-            # ordre de la récurrence ?
-            # cas de base ? 
-            # cas général ?
-            pass
-
         if self.tete is None: 
             print("Liste vide !")
         else:
+            def afficher_aux(cellule):
+                if cellule is None:
+                    print("None")
+                    return
+                print(cellule.valeur, end=" -> ")
+                afficher_aux(cellule.suivant)
+
             afficher_aux(self.tete)
 
 def tests():
