@@ -7,25 +7,30 @@ from listes_doublement_chainees import ListeDoublementChainee
 class File:
 
     def __init__(self): 
-        pass
+        self.data = ListeDoublementChainee()
 
     def est_vide(self): 
-        pass
+        return self.data.est_vide()
     
     def premier(self) : 
-        pass
+        if self.est_vide() : 
+            return "La file est vide !"
+        else : 
+            return self.data.tete.valeur
     
     def enfiler(self, x): 
-        pass
+        self.data.inserer_queue(x)
     
     def defiler(self):
-        pass
+        val = self.premier()
+        self.data.supprimer_tete()
+        return val
     
     def longueur(self): 
-        pass
+        return self.data.longueur()
     
     def afficher(self):
-        pass
+        self.data.afficher()
 
 
 if __name__ == "__main__":

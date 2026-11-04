@@ -6,25 +6,25 @@
 class File:
 
     def __init__(self): 
-        pass
+        self.data = []
 
     def est_vide(self): 
-        pass
+        return self.data == []
 
     def premier(self) : 
-        pass
+        return self.data[0]
     
     def enfiler(self, x): 
-        pass
+        self.data.append(x)
     
     def defiler(self):
-        pass
+        return self.data.pop(0)
     
     def longueur(self): 
-        pass
+        return len(self.data)
     
     def afficher(self):
-        pass
+        print(self.data)
 
 
 if __name__ == "__main__":
