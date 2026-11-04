@@ -8,18 +8,23 @@ Afficher leurs noms et leurs groupes dans la méthode de classe afficher_resume
 
 class Etudiant:
     nombre_etudiants = 0  # Variable de classe
+    tous_les_etudiants = [] # Liste contenant tous les étudiants
 
     # Méthode de classe : travaille sur les données communes à toute la classe (cls.nombre_etudiants).
     # L'appel instance.foo() transmet automatiquement la classe cls comme premier argument de la méthode 
     @classmethod
     def afficher_resume(cls):
         print(f"étudiants : {cls.nombre_etudiants}")
+        for i, e in enumerate(cls.tous_les_etudiants) :
+            print(f"Etudiant {i} : {e.nom} ({Etudiant.extraire_groupe_td(e.groupe)})")
+    
 
     # Constructeur : utilisé lors de l'appel à Etudiant()
     def __init__(self, n, g):
         self.nom = n
         self.groupe = g
         Etudiant.nombre_etudiants += 1
+        Etudiant.tous_les_etudiants.append(self)
 
     # Méthode d'instance : travaille sur les données d'un objet particulier (self.nom, self.groupe).
     # L'appel instance.foo() transmet automatiquement l'instance self comme premier argument de la méthode
