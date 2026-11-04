@@ -15,7 +15,41 @@ def eval_NPI_file(fileExpression):
     # mais qu'elle ne correspond pas à un résultat calculable car elle est incomplète
     # renvoyer (True, Entier) signifie que l'expression est valide, 
     # et que son évaluation donne Entier comme résultat
-    pass 
+
+    p = Pile()
+
+    while not fileExpression.est_vide():
+        token = fileExpression.defiler()
+
+        if isinstance(token, int):
+            p.empiler(token)
+
+        elif token in ['+', '-', '*', '/']:
+            if p.longueur < 2 :
+                return (False, None)
+            b = p.depiler()
+            a = p.depiler()
+
+            if token == '+':
+                p.empiler(a + b)
+            elif token == '-':
+                p.empiler(a - b)
+            elif token == '*':
+                p.empiler(a * b)
+            elif token == '/':
+                if b == 0:
+                    return (False, None)
+                p.empiler(a // b)
+        
+        else :
+            return(False, None)
+
+    if p.longueur() == 1:
+        return (True, p.depiler())
+    elif p.longueur() == 0:
+        return (True, None)
+    else:
+        return (False, None) 
    
 
 def eval_NPI_liste(listeExpression):
@@ -26,7 +60,36 @@ def eval_NPI_liste(listeExpression):
     # mais qu'elle ne correspond pas à un résultat calculable car elle est incomplète
     # renvoyer (True, Entier) signifie que l'expression est valide, 
     # et que son évaluation donne Entier comme résultat
-    pass 
+    
+    p = Pile()
+
+    for token in listeExpression:
+        if isinstance(token, int):
+            p.empiler(token)
+        elif token in ['+', '-', '*', '/']:
+            if p.longueur() < 2:
+                return (False, None)
+            b = p.depiler()
+            a = p.depiler()
+            if token == '+':
+                p.empiler(a + b)
+            elif token == '-':
+                p.empiler(a - b)
+            elif token == '*':
+                p.empiler(a * b)
+            elif token == '/':
+                if b == 0:
+                    return (False, None)
+                p.empiler(a // b) 
+        else:
+            return (False, None)
+
+    if p.longueur() == 1:
+        return (True, p.depiler())
+    elif p.longueur() == 0:
+        return (True, None)
+    else:
+        return (False, None)
 
 
 
